@@ -4,6 +4,7 @@ import com.example.base.user.domain.model.User;
 import com.example.base.user.domain.repository.IUserRepository;
 import com.example.base.user.infrastructure.persistence.JpaUserRepository;
 import com.example.base.user.infrastructure.persistence.entity.UserEntity;
+import com.example.base.user.infrastructure.persistence.mapper.IUserMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,26 +14,28 @@ import java.util.Optional;
 public class UserRepositoryAdapter implements IUserRepository {
 
     private final JpaUserRepository jpaUserRepository;
+    private final IUserMapper userMapper;
 
-    public UserRepositoryAdapter(JpaUserRepository jpaUserRepository) {
+    public UserRepositoryAdapter(JpaUserRepository jpaUserRepository, IUserMapper userMapper) {
         this.jpaUserRepository = jpaUserRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
     public User save(User user) {
-        UserEntity entity = toEntity(user);
+        UserEntity entity = userMapper.toEntity(user);
         UserEntity saved = jpaUserRepository.save(entity);
-        return toDomain(saved);
+        return userMapper.toDomain(saved);
     }
 
     @Override
     public Optional<User> findById(Long id) {
-        return jpaUserRepository.findById(id).map(this::toDomain);
+        return jpaUserRepository.findById(id).map(userMapper::toDomain);
     }
 
     @Override
     public List<User> findAll() {
-        return jpaUserRepository.findAll().stream().map(this::toDomain).toList();
+        return jpaUserRepository.findAll().stream().map(userMapper::toDomain).toList();
     }
 
     @Override
@@ -50,26 +53,6 @@ public class UserRepositoryAdapter implements IUserRepository {
         return jpaUserRepository.existsByEmail(email);
     }
 
-    // Mapeos entre User (dominio) y UserEntity (persistencia)
-    private User toDomain(UserEntity entity) {
-        return new User(
-                entity.getId(),
-                entity.getUsername(),
-                entity.getEmail(),
-                entity.getPassword(),
-                entity.getPokemonsIds()
-        );
-    }
 
-    private UserEntity toEntity(User user) {
-        return new UserEntity(
-                user.getId(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getPassword(),
-                user.getPokemonsIds()
-
-        );
-    }
 }
 
