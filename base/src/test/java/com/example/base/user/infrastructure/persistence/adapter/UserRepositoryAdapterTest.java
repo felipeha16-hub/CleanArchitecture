@@ -4,6 +4,7 @@ import com.example.base.user.domain.model.User;
 
 import com.example.base.user.infrastructure.persistence.JpaUserRepository;
 import com.example.base.user.infrastructure.persistence.entity.UserEntity;
+import com.example.base.user.infrastructure.persistence.mapper.IUserMapperImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import(UserRepositoryAdapter.class)
+// AQUÍ: Añade la implementación del Mapper (la que termina en Impl)
+@Import({UserRepositoryAdapter.class, IUserMapperImpl.class})
 class UserRepositoryAdapterTest {
 
     @Autowired

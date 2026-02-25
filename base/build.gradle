@@ -59,6 +59,14 @@ dependencies {
 	// Si usas Lombok, asegúrate de que el processor de MapStruct
 	// esté DESPUÉS del de Lombok para que pueda leer los getters/setters
 	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+
+	// MapStruct
+	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+	// Si usas Lombok, es CRÍTICO añadir esto para que MapStruct vea los Getters/Setters
+	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 }
 
 tasks.named('test') {
