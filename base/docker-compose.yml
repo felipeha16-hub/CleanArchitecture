@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres
+    container_name: postgres_server
+    restart: always
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - pgdata:/var/lib/postgresql
+
+    environment:
+      DATABASE_HOST: 127.0.0.1
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: mi_base_db
+
+volumes:
+  pgdata:
