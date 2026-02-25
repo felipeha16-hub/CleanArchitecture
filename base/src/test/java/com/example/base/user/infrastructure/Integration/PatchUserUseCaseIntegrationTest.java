@@ -38,7 +38,7 @@ class PatchUserUseCaseIntegrationTest {
     @DisplayName("Integration: Should update user fields partially")
     void shouldUpdateUserSuccessfully() {
         // 1. Arrange: Usuario inicial
-        var created = createUserUseCase.create(new CreateUserDTO("Original", "old@mail.com", "123", new Long[]{1L}));
+        var created = createUserUseCase.create(new CreateUserDTO("Original", "old@mail.com", "Password123", new Long[]{1L}));
 
         // DTO con solo los campos a cambiar (Patch)
         UpdateUserDTO updateDTO = new UpdateUserDTO();
@@ -61,8 +61,8 @@ class PatchUserUseCaseIntegrationTest {
     @DisplayName("Integration: Should throw exception when updating to an existing email")
     void shouldFailWhenEmailAlreadyExists() {
         // 1. Arrange: Dos usuarios existentes
-        createUserUseCase.create(new CreateUserDTO("User1", "email1@mail.com", "123", new Long[]{}));
-        var user2 = createUserUseCase.create(new CreateUserDTO("User2", "email2@mail.com", "123", new Long[]{}));
+        createUserUseCase.create(new CreateUserDTO("User1", "email1@mail.com", "Password123", new Long[]{}));
+        var user2 = createUserUseCase.create(new CreateUserDTO("User2", "email2@mail.com", "PassWord123", new Long[]{}));
 
         // Intentar actualizar User2 con el email de User1
         UpdateUserDTO conflictDTO = new UpdateUserDTO();
