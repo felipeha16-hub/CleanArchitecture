@@ -37,7 +37,7 @@ public class GetUserIdUseCaseIntegrationTest {
 
     @Test
     @DisplayName("Integration Success: Get User By ID (Reactive Flow)")
-    void integrationGetUserById() {
+    void shouldGetUserById() {
         // 1. Arrange
         var userToCreate = new CreateUserDTO("Ash", "ash@mail.com", "password123", new Long[]{1L,2L});
         var createdUser = createUserUseCase.create(userToCreate);

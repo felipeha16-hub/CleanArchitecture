@@ -33,7 +33,7 @@ public class CreateUserUseCaseIntegrationTest {
 
     @Test
     @DisplayName("integration succes:  UseCase -> Adapter -> DB")
-    void integrationCreateUser() {
+    void shouldCreateUser() {
 
         CreateUserDTO userRequest = new CreateUserDTO( "Red", "red@pallet.com", "password123", new Long[]{1L, 2L});
 

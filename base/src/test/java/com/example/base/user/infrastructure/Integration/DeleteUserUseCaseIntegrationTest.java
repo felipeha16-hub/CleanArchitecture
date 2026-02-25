@@ -38,7 +38,7 @@ public class DeleteUserUseCaseIntegrationTest {
 
     @Test
     @DisplayName("integration succes:  UseCase -> Adapter -> DB")
-    void  integrationdeleteUser() {
+    void  shouldDeleteUser() {
         // Crear un usuario para luego eliminarlo
         CreateUserDTO createDTO = new CreateUserDTO("TestUser", "test@mail.com", "password123", new Long[]{1L});
         UserResponseDTO createdUser = createUserUseCase.create(createDTO);
