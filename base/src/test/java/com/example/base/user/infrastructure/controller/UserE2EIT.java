@@ -5,7 +5,6 @@ import com.example.base.user.application.dto.UpdateUserDTO;
 import com.example.base.user.application.dto.UserResponseDTO;
 import com.example.base.user.application.dto.UserWhitPokemonDTO;
 import com.example.base.user.infrastructure.persistence.JpaUserRepository;
-import com.example.base.user.infrastructure.persistence.entity.UserEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

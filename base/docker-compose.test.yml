@@ -1,0 +1,44 @@
+services:
+
+  api:
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+    build:
+        context: .
+        dockerfile: Dockerfile
+
+    command: sh -c "./gradlew test --no-daemon"
+    ports:
+      - 8081:8080
+    environment:
+      DB_TEST_URL: jdbc:postgresql://postgres:5432/user_test_db
+      DB_TEST_USERNAME: root
+      DB_TEST_PASSWORD: root
+      POKEMON_API_URL: https://pokeapi.co/api/v2/pokemon
+      SERVER_PORT: 8080
+      SPRING_PROFILES_ACTIVE: test
+    restart: unless-stopped
+
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_server_test
+    restart: always
+
+    ports:
+      - "5433:5432"
+
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: user_test_db
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d user_test_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
