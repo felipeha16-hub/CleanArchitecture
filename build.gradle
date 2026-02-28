@@ -18,8 +18,14 @@ java {
 }
 
 jacocoTestReport {
-	reports {
-		xml.required = true
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: [
+					'com/example/*/infrastructure/dto/**',
+					'com/example/*/infrastructure/persistence/entity/**',
+					'com/example/MainApplication.class'
+			])
+		}))
 	}
 }
 
