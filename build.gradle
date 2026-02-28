@@ -26,8 +26,9 @@ jacocoTestReport {
 	afterEvaluate {
 		classDirectories.setFrom(files(classDirectories.files.collect {
 			fileTree(dir: it, exclude: [
-					'com/example/user/*/infrastructure/dto/**',
-					'com/example/user/*/infrastructure/persistence/entity/**',
+					'com/example/user/infrastructure/dto/**',
+					'com/example/user/infrastructure/persistence/entity/**',
+					'com/example/user/configuration/**',
 					'com/example/user/MainApplication.class'
 			])
 		}))
@@ -50,7 +51,6 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	//implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'io.projectreactor.netty:reactor-netty-http'
@@ -61,14 +61,13 @@ dependencies {
 
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.0'
-	// OpenAPI / Swagger - Versión compatible con Spring Boot 3.4.2
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	//testImplementation 'org.springframework.boot:spring-boot-starter-security-test'
+
 	testImplementation "org.testcontainers:postgresql:1.19.0"
 	testImplementation "org.testcontainers:junit-jupiter:1.19.0"
 	testImplementation 'io.projectreactor:reactor-test'
@@ -80,16 +79,14 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 
-	// Si usas Lombok, asegúrate de que el processor de MapStruct
-	// esté DESPUÉS del de Lombok para que pueda leer los getters/setters
+
 	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
 
-	// MapStruct
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 
-	// Si usas Lombok, es CRÍTICO añadir esto para que MapStruct vea los Getters/Setters
+
 	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 }
 
