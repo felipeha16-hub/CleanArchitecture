@@ -23,16 +23,6 @@ jacocoTestReport {
 		xml.required = true
 		html.required = true
 	}
-	afterEvaluate {
-		classDirectories.setFrom(files(classDirectories.files.collect {
-			fileTree(dir: it, exclude: [
-					'com/example/user/infrastructure/dto/**',
-					'com/example/user/infrastructure/persistence/entity/**',
-					'com/example/user/configuration/**',
-					'com/example/user/MainApplication.class'
-			])
-		}))
-	}
 }
 
 test {
