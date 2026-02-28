@@ -26,11 +26,11 @@ jobs:
           steps:
             - run:
                 name: Build and Test
-                # Generamos el reporte XML
+                # Generate XML Report
                 command: ./gradlew build jacocoTestReport
             - coveralls/upload:
-                # Ruta estándar donde Gradle deja el XML de JaCoCo
-                path_to_xml_report: build/reports/jacoco/test/jacocoTestReport.xml
+                # path XML of JaCoCo
+                coverage_file: build/reports/jacoco/test/jacocoTestReport.xml
 
 workflows:
   version: 2
