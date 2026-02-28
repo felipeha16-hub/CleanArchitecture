@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   gradle: circleci/gradle@3.0.0
+  coveralls: coveralls/coveralls@2.2.1
 
 jobs:
   build-and-test:
@@ -34,6 +35,8 @@ jobs:
                 name: Upload to Coveralls
                 # provider of plugin tha add in Gradle
                 command: ./gradlew coveralls
+            - coveralls/upload:
+                path_to_xml_report: build/reports/jacoco/test/jacocoTestReport.xml
 
 workflows:
   version: 2
