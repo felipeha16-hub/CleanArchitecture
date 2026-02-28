@@ -1,0 +1,40 @@
+services:
+
+  api:
+    command: sh -c "java -jar build/libs/CleanArchitecture-0.0.1-SNAPSHOT.jar"
+    depends_on:
+      - postgres
+    build:
+        context: .
+        dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      DB_URL: jdbc:postgresql://postgres_server:5432/mi_base_db
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      DB_DRIVER: org.postgresql.Driver
+      POKEMON_API_URL: https://pokeapi.co/api/v2/pokemon
+      SERVER_PORT: 8080
+    restart: unless-stopped
+
+
+  postgres:
+    image: postgres
+    container_name: postgres_server
+    restart: always
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - pgdata:/var/lib/postgresql
+
+    environment:
+      DATABASE_HOST: 127.0.0.1
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: mi_base_db
+
+volumes:
+  pgdata:
