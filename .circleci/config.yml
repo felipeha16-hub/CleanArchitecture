@@ -25,17 +25,11 @@ jobs:
       - gradle/with_cache:
           steps:
             - run:
-                name: Build
-                command: ./gradlew build
-            - run:
-                name: Run All Tests and Generate Coverage
-                # Run jacocoTestReport after tests
-                command: ./gradlew test jacocoTestReport
-            - run:
-                name: Upload to Coveralls
-                # provider of plugin tha add in Gradle
-                command: ./gradlew coveralls
+                name: Build and Test
+                # Generamos el reporte XML
+                command: ./gradlew build jacocoTestReport
             - coveralls/upload:
+                # Ruta estándar donde Gradle deja el XML de JaCoCo
                 path_to_xml_report: build/reports/jacoco/test/jacocoTestReport.xml
 
 workflows:
