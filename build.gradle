@@ -2,7 +2,11 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.2'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'jacoco' //to generate report of coverall
+	id 'com.github.kt3k.coveralls' version '2.12.2' // Plugin  Coverall
 }
+
+
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -12,6 +16,16 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(21)
 	}
+}
+
+jacocoTestReport {
+	reports {
+		xml.required = true
+	}
+}
+
+test {
+	finalizedBy jacocoTestReport
 }
 
 configurations {

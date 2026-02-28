@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   gradle: circleci/gradle@3.0.0
-  coveralls: coveralls/coveralls@2.2.5
 
 jobs:
   build-and-test:
@@ -28,11 +27,13 @@ jobs:
                 name: Build
                 command: ./gradlew build
             - run:
-                name: Test
-                command: ./gradlew test
-            - gradle/collect_test_results:
-                reports_path: build/reports/
-                test_results_path: build/test-results/
+                name: Run All Tests and Generate Coverage
+                # Run jacocoTestReport after tests
+                command: ./gradlew test jacocoTestReport
+            - run:
+                name: Upload to Coveralls
+                # provider of plugin tha add in Gradle
+                command: ./gradlew coveralls
 
 workflows:
   version: 2
