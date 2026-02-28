@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   gradle: circleci/gradle@3.0.0
-  coveralls: coveralls/coveralls@2.2.5
+  coveralls: coveralls/coveralls@2.2.1
 
 jobs:
   build-and-test:
@@ -25,14 +25,12 @@ jobs:
       - gradle/with_cache:
           steps:
             - run:
-                name: Build
-                command: ./gradlew build
-            - run:
-                name: Test
-                command: ./gradlew test
-            - gradle/collect_test_results:
-                reports_path: build/reports/
-                test_results_path: build/test-results/
+                name: Build and Test
+                # Generate XML Report
+                command: ./gradlew build jacocoTestReport
+            - coveralls/upload:
+                # path XML of JaCoCo
+                coverage_file: build/reports/jacoco/test/jacocoTestReport.xml
 
 workflows:
   version: 2

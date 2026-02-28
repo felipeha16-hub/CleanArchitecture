@@ -7,9 +7,9 @@ every request must only accept this 'Content-type: application/json'.
 
 
 ### Badges
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/felipeha16-hub/CleanArchitecture/tree/feature/feherrer.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/felipeha16-hub/CleanArchitecture/tree/feature/feherrer)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/felipeha16-hub/CleanArchitecture/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/felipeha16-hub/CleanArchitecture/tree/master)
 
-
+[![Coverage Status](https://coveralls.io/repos/github/felipeha16-hub/CleanArchitecture/badge.svg?branch=feature/feherrer)](https://coveralls.io/github/felipeha16-hub/CleanArchitecture?branch=feature/feherrer)
 ### Features
 
 - Create new Users with their Pokemon Ids
