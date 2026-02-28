@@ -7,7 +7,7 @@ every request must only accept this 'Content-type: application/json'.
 
 
 ### Badges
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/felipeha16-hub/CleanArchitecture/tree/feature/feherrer.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/felipeha16-hub/CleanArchitecture/tree/feature/feherrer)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/felipeha16-hub/CleanArchitecture/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/felipeha16-hub/CleanArchitecture/tree/feature/feherrer)
 
 
 ### Features
