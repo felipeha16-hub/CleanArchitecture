@@ -4,6 +4,12 @@ You have to build a microservice that exposes a REST api with two different tabl
 users and states. Both tables should be open to creation, deletion, or update.
 every request must only accept this 'Content-type: application/json'.
 
+
+
+### Badges
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/felipeha16-hub/CleanArchitecture/tree/feature/feherrer.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/felipeha16-hub/CleanArchitecture/tree/feature/feherrer)
+
+
 ### Features
 
 - Create new Users with their Pokemon Ids
@@ -80,3 +86,4 @@ without fear of breaking current functionality
 ## Env vars should be defined
 
 To find an example of the values you can use .env.example
+
