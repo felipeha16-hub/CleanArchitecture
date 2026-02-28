@@ -6,6 +6,19 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/openjdk:21.0
+        environment:
+          TEST_DATABASE_URL: postgresql://postgres@localhost/user_test_db
+          DB_TEST_USERNAME: root
+          DB_TEST_PASSWORD: root
+          POKEMON_API_URL: https://pokeapi.co/api/v2/pokemon
+          SPRING_PROFILES_ACTIVE: test
+
+      #Database
+      - image: cimg/postgres:15.0
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: root
+          POSTGRES_DB: user_test_db
     steps:
       - checkout
       - gradle/with_cache:
