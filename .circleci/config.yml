@@ -1,0 +1,41 @@
+version: 2.1
+orbs:
+  gradle: circleci/gradle@3.0.0
+  coveralls: coveralls/coveralls@2.2.5
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/openjdk:21.0
+        environment:
+          TEST_DATABASE_URL: postgresql://postgres@localhost/user_test_db
+          DB_TEST_USERNAME: root
+          DB_TEST_PASSWORD: root
+          POKEMON_API_URL: https://pokeapi.co/api/v2/pokemon
+          SPRING_PROFILES_ACTIVE: test
+
+      #Database
+      - image: cimg/postgres:15.0
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: root
+          POSTGRES_DB: user_test_db
+    steps:
+      - checkout
+      - gradle/with_cache:
+          steps:
+            - run:
+                name: Build
+                command: ./gradlew build
+            - run:
+                name: Test
+                command: ./gradlew test
+            - gradle/collect_test_results:
+                reports_path: build/reports/
+                test_results_path: build/test-results/
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-and-test
