@@ -5,6 +5,8 @@ users and states. Both tables should be open to creation, deletion, or update.
 every request must only accept this 'Content-type: application/json'.
 
 
+## Deployed App Running on HEROKU
+- [Swagger](https://backchallenge-8e96dd7c7ae3.herokuapp.com/swagger-ui/index.html#/)
 
 ### Badges
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/felipeha16-hub/CleanArchitecture/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/felipeha16-hub/CleanArchitecture/tree/master)
@@ -79,11 +81,12 @@ without fear of breaking current functionality
     - Integration Test: (Spring Data JPA + H2/Postgres) Validate the actual persistence and orchestration of Use Cases with the DB.
     - E2E Test: (TestRestTemplate + AssertJ) Simular Simulate a real client consuming the API and verify the response JSON.
 
+## Route
 
-- : [!API Swagger] (http://localhost:8080/swagger-ui/index.html#/)
-
+  - Local : [Swagger](http://localhost:8080/swagger-ui/index.html#/)
 
 ## Env vars should be defined
 
 To find an example of the values you can use .env.example
+
 
