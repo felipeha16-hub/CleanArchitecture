@@ -29,7 +29,7 @@ public class UserMapper {
     public UserWhitPokemonDTO toUserWithPokemonDTO(User user, List<String> pokemonNames) {
         Long[] ids = user.getPokemonsIds();
 
-        // Si no hay ids o nombres, devolvemos lista vacía
+        // If there are no ids or names, we return an empty list
         if (ids == null || ids.length == 0) {
             return new UserWhitPokemonDTO(user.getId(), user.getUsername(), user.getEmail(), List.of());
         }
@@ -51,7 +51,7 @@ public class UserMapper {
     }
 
     public static User toDomain(UpdateUserDTO dto, User existing) {
-        // Aplicar cambios parciales al dominio
+
         if (dto.getUsername() != null) existing.setUsername(dto.getUsername());
         if (dto.getEmail() != null) existing.setEmail(dto.getEmail());
         if (dto.getPokemonsIds() != null) existing.setPokemonsIds(dto.getPokemonsIds());

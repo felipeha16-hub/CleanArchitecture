@@ -39,11 +39,11 @@ public class CreateUserUseCaseIntegrationTest {
 
         UserResponseDTO savedUser = createUserUseCase.create(userRequest);
 
-        // Validamos la respuesta del dominio
+        // Validate the domain response
         assertThat(savedUser.getId()).isNotNull();
         assertThat(savedUser.getUsername()).isEqualTo("Red");
 
-        // Verificación de Infraestructura: ¿Está realmente en PostgreSQL?
+
         var userInDb = jpaUserRepository.findById(savedUser.getId());
         assertThat(userInDb).isPresent();
         assertThat(userInDb.get().getPokemonsIds()).containsExactly(1L, 2L);

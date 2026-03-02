@@ -80,13 +80,13 @@ public class GlobalExceptionHandler {
 
         String path = extractPath(request);
 
-        // Obtener el primer error de validación
+        // Get the first validation error
         String errorMessage = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .findFirst()
                 .map(error -> error.getField() + ": " + error.getDefaultMessage())
-                .orElse("Error de validación");
+                .orElse("Validation error");
 
         log.warn("Validation error: {} - Path: {}", errorMessage, path);
 

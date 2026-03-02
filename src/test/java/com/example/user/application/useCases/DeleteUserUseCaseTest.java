@@ -33,7 +33,7 @@ public class DeleteUserUseCaseTest {
        deleteUserUseCase.delete(userId);
 
         verify(repository, times(1)).deleteById(userId);
-        // Verificación de que no se llamó a nada más en el repo después de borrar
+        // Verification that nothing else was called on the repo after deletion
         verifyNoMoreInteractions(repository);
 
 

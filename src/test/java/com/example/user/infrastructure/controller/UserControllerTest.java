@@ -180,7 +180,7 @@ class UserControllerTest {
     void createUser_EmailConflict_ReturnsError() {
         CreateUserDTO request = new CreateUserDTO("Jhon", "exists@mail.com", "password123", new Long[]{1L});
 
-        // El UseCase de creación es sincrónico, usamos thenThrow
+
         when(createUserUseCase.create(any(CreateUserDTO.class)))
                 .thenThrow(new BusinessException(BusinessErrorMessage.USER_ALREADY_EXISTS));
 

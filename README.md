@@ -5,6 +5,8 @@ users and states. Both tables should be open to creation, deletion, or update.
 every request must only accept this 'Content-type: application/json'.
 
 
+## Deployed App Running on HEROKU
+- [Swagger](https://backchallenge-8e96dd7c7ae3.herokuapp.com/swagger-ui/index.html#/)
 
 ### Badges
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/felipeha16-hub/CleanArchitecture/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/felipeha16-hub/CleanArchitecture/tree/master)
@@ -44,11 +46,6 @@ every request must only accept this 'Content-type: application/json'.
 - Deployment could be done
 - It is not necessary to test every part of the project; E2E testing alone was sufficient to test the functionality.
 
-## Errors to be fixed
-- Note: D:\Archivos\JOB\Spring_Boot\CleanArchitecture\src\test\java\com\example\user\infrastructure\controller\UserE2EIT.java uses unchecked or unsafe operations.
-  Note: Recompile with -Xlint:unchecked for details.
-- add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
-
 
 ## Techs
 
@@ -71,19 +68,20 @@ every request must only accept this 'Content-type: application/json'.
 
 
 
-- Tets: to ensure that every piece—from the database to the API response—is robust, facilitating future changes 
+- Tests: to ensure that every piece—from the database to the API response—is robust, facilitating future changes
 without fear of breaking current functionality
 
     - Unit Test: (JUnit 5 + Mockito) Validate pure business logic and dependency mocks.
     - Component Test: (JUnit 5 + MapStruct) Check that the mappings between DTOs, Entities and Domain are accurate.
     - Integration Test: (Spring Data JPA + H2/Postgres) Validate the actual persistence and orchestration of Use Cases with the DB.
-    - E2E Test: (TestRestTemplate + AssertJ) Simular Simulate a real client consuming the API and verify the response JSON.
+    - E2E Test: (TestRestTemplate + AssertJ) Simulate a real client consuming the API and verify the response JSON.
 
+## Route
 
-- : [!API Swagger] (http://localhost:8080/swagger-ui/index.html#/)
-
+  - Local : [Swagger](http://localhost:8080/swagger-ui/index.html#/)
 
 ## Env vars should be defined
 
 To find an example of the values you can use .env.example
+
 

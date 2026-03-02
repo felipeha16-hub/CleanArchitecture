@@ -96,7 +96,7 @@ class PatchUserUseCaseTest {
         patchUserUseCase.update(userId, updateDTO);
 
         // Assert
-        // Verificamos que NUNCA se llamó a existsByEmail porque el email no cambió
+        // Verify that existsByEmail was NEVER called because the email did not change
         verify(repository, never()).existsByEmail(anyString());
         verify(repository).save(any());
     }

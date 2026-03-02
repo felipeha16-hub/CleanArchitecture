@@ -52,7 +52,7 @@ class PatchUserUseCaseIntegrationTest {
         assertThat(response.getUsername()).isEqualTo("Updated Name");
         assertThat(response.getEmail()).isEqualTo("new@mail.com");
 
-        // Verificar que en la DB realmente se guardó
+        // Verify that it was really saved in the DB
         var dbUser = jpaUserRepository.findById(created.getId()).get();
         assertThat(dbUser.getUsername()).isEqualTo("Updated Name");
     }

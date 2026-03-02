@@ -16,7 +16,7 @@ public class GetUsersUseCase {
 
 
     public List<UserResponseDTO> getAllUsers() {
-        // Lógica para obtener todos los usuarios
+
         return repository.findAll().stream()
                 .map(UserMapper::toDTO)
                 .toList();

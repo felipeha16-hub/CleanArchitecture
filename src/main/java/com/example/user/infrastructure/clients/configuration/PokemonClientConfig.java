@@ -21,22 +21,22 @@ public class PokemonClientConfig {
 
     @Bean
     public WebClient webClient() {
-        // Configurar connection pool para operaciones paralelas
+        // Configure connection pool for parallel operations
         ConnectionProvider connectionProvider = ConnectionProvider.builder("pokemon-pool")
-                .maxConnections(50)           // reducir a 50 para menor saturación
+                .maxConnections(50)           // Reduce to 50 for less saturation
                 .maxIdleTime(Duration.ofSeconds(20))
                 .build();
 
-        // Configurar HttpClient con timeouts
+        // Configure HttpClient with timeouts
         HttpClient httpClient = HttpClient.create(connectionProvider)
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)      // 5s conexión
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)      // 5s connection
                 .option(ChannelOption.SO_KEEPALIVE, true)
-                .responseTimeout(Duration.ofSeconds(10))                  // 10s lectura
+                .responseTimeout(Duration.ofSeconds(10))                  // 10s read timeout
                 .doOnConnected(conn -> conn
                         .addHandlerLast(new ReadTimeoutHandler(10, TimeUnit.SECONDS))
                         .addHandlerLast(new WriteTimeoutHandler(5, TimeUnit.SECONDS)));
 
-        // Crear WebClient sin configuración de buffer
+        // Create WebClient without buffer configuration
         return WebClient.builder()
                 .baseUrl(BASE_URL)
                 .clientConnector(new ReactorClientHttpConnector(httpClient))
