@@ -14,29 +14,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 
-/**
- * GlobalExceptionHandler: Maneja excepciones de negocio a nivel global
- *
- * Esto evita que tengas que manejar excepciones en cada controlador
- * y estandariza las respuestas de error.
- *
- * Se activa mediante la propiedad: app.exception-handler.enabled=true
- */
+
 
 @RestControllerAdvice
 @ConditionalOnProperty(name = "app.exception-handler.enabled", havingValue = "true")
 @Slf4j
 public class GlobalExceptionHandler {
 
-    /**
-     * Manejador para excepciones de negocio (BusinessException)
-     *
-     * Esto intercepta cualquier BusinessException lanzada en:
-     * - Use Cases
-     * - Services
-     * - Controladores
-     * - Flujos reactivos (Mono/Flux)
-     */
+
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ErrorResponseDTO> handleBusinessException(
             BusinessException ex,
@@ -45,7 +30,7 @@ public class GlobalExceptionHandler {
         var errorMessage = ex.getBusinessErrorMessage();
         var status = errorMessage.getHttpStatus();
 
-        // Extraer el path del request
+        // Extract the path from the request
         String path = extractPath(request);
 
         log.warn("BusinessException capturada: {} - Path: {}", errorMessage.getMessage(), path);
@@ -66,12 +51,12 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Manejador para errores de validación (@Valid, @Validated)
+     * Handler for validation errors (@Valid, @Validated)
      *
-     * Captura errores cuando las validaciones del DTO fallan:
+     * Catches errors when DTO validations fail:
      * - @Size, @NotNull, @NotBlank, @Email, @Min, @Max, etc.
      *
-     * Retorna 400 Bad Request con el mensaje de validación
+     * Returns 400 Bad Request with the validation message
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponseDTO> handleValidationException(
@@ -105,7 +90,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Manejador genérico para excepciones no controladas
+     * Generic handler for unhandled exceptions
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleGenericException(
@@ -114,13 +99,13 @@ public class GlobalExceptionHandler {
 
         String path = extractPath(request);
 
-        log.error("Excepción no manejada: {}", ex.getMessage(), ex);
+        log.error("Unhandled exception: {}", ex.getMessage(), ex);
 
         ErrorResponseDTO errorResponse = ErrorResponseDTO.builder()
                 .timestamp(System.currentTimeMillis())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
-                .message("Error interno del servidor")
+                .message("Internal server error")
                 .path(path)
                 .build();
 
