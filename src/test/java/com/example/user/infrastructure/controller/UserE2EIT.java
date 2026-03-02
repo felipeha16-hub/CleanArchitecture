@@ -64,7 +64,7 @@ class UserE2EIT {
         assertThat(getResponse.getBody().getPokemons()).extracting("name").containsExactly("bulbasaur", "charmander");
 
 
-        // --- 3. DELETE: Eliminar ---
+        // --- 3. DELETE ---
         ResponseEntity<Void> deleteResponse = restTemplate.exchange(
                 "/api/users/" + userId,
                 org.springframework.http.HttpMethod.DELETE,
@@ -74,21 +74,21 @@ class UserE2EIT {
 
         assertThat(deleteResponse.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
 
-        // --- 4. VERIFICACIÓN: ¿Realmente se borró? ---
+        // --- 4. Was it really deleted ---
         ResponseEntity<String> getAfterDelete = restTemplate.getForEntity(
                 "/api/users/" + userId,
                 String.class
         );
 
-        //debería devolver 404
+        // Should return 404
         assertThat(getAfterDelete.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(getAfterDelete.getBody()).contains("Usuario no encontrado");
     }
 
     @Test
-    @DisplayName("E2E: GET All - Debe retornar lista de usuarios")
+    @DisplayName("E2E: GET All - Should return list of users")
     void shouldReturnListOfUsers() {
-        // 1. Arrange: Insertar 2 usuarios directamente vía repositorio o UseCase
+
         CreateUserDTO createRequest = new CreateUserDTO("Brock", "brock@pewter.com", "password123", new Long[]{1L, 4L});
         CreateUserDTO createRequest2 = new CreateUserDTO("Brock2", "brock2@pewter.com", "password123", new Long[]{2L, 3L});
 
@@ -104,17 +104,17 @@ class UserE2EIT {
 
         // 3. Assert
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).hasSize(2); // Depende de cuántos creaste
+        assertThat(response.getBody()).hasSize(2);
     }
 
     @Test
-    @DisplayName("E2E: POST 400 - Error al crear email duplicado")
+    @DisplayName("E2E: POST 400 - Error when creating duplicate email")
     void shouldReturn400WhenEmailExists() {
-        // 1. Arrange: Crear un usuario previo
+        // 1. Arrange: Create a previous user
         CreateUserDTO user = new CreateUserDTO("Original", "duplicate@mail.com", "password123", new Long[]{1L});
         restTemplate.postForEntity("/api/users", user, String.class);
 
-        // 2. Act: Intentar crear otro con el mismo email
+        // 2. Act: Try to create another with the same email
         ResponseEntity<String> response = restTemplate.postForEntity("/api/users", user, String.class);
 
         // 3. Assert
@@ -123,17 +123,17 @@ class UserE2EIT {
     }
 
     @Test
-    @DisplayName("E2E: Patch 200 - Actualizar parcialmente un usuario")
+    @DisplayName("E2E: Patch 200 - Partially update a user")
     void shouldPartiallyUpdateUser() {
-        // 1. Arrange: Crear un usuario previo
+        // 1. Arrange: Create a previous user
         CreateUserDTO createRequest = new CreateUserDTO("Original", "original@mail.com", "password123", new Long[]{1L});
         ResponseEntity<UserResponseDTO> createResponse = restTemplate.postForEntity("/api/users", createRequest, UserResponseDTO.class);
         Long userId = createResponse.getBody().getId();
 
-        // DTO de actualización parcial (solo el nombre)
+        // DTO for partial update (only the name)
         UpdateUserDTO updateUser = new UpdateUserDTO("OriginalUpdated", null, null);
 
-        // 2. Act: Enviar PATCH
+        // 2. Act: Send PATCH
         ResponseEntity<UserResponseDTO> patchResponse = restTemplate.exchange(
                 "/api/users/" + userId,
                 org.springframework.http.HttpMethod.PATCH,
@@ -144,16 +144,15 @@ class UserE2EIT {
         // 3. Assert
         assertThat(patchResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(patchResponse.getBody().getUsername()).isEqualTo("OriginalUpdated");
-        assertThat(patchResponse.getBody().getEmail()).isEqualTo("original@mail.com"); // El email no debería cambiar
+        assertThat(patchResponse.getBody().getEmail()).isEqualTo("original@mail.com");
 
 
     }
 
     @Test
-    @DisplayName("E2E: POST 400 - Error de validación por datos inválidos")
+    @DisplayName("E2E: POST 400 - Validation error due to invalid data")
     void shouldReturn400WhenDataIsInvalid() {
-        // 1. Arrange: Enviamos un email con formato incorrecto y un username vacío
-        // (Ajusta los campos según las anotaciones @NotBlank, @Email, etc., que tengas en tu DTO)
+        // 1. Arrange
         CreateUserDTO invalidRequest = new CreateUserDTO("", "esto-no-es-un-email", "123", new Long[]{});
 
         // 2. Act

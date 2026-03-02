@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-// AQUÍ: Añade la implementación del Mapper (la que termina en Impl)
+// Add the Mapper implementation (the one ending in Impl)
 @Import({UserRepositoryAdapter.class, IUserMapperImpl.class})
 class UserRepositoryAdapterTest {
 
@@ -32,22 +32,22 @@ class UserRepositoryAdapterTest {
     private JpaUserRepository jpaUserRepository;
 
     @Test
-    @DisplayName("Validación total: Adapter -> DB (Entidad) -> Adapter")
+    @DisplayName("Full validation: Adapter -> DB (Entity) -> Adapter")
     void saveUser() {
-        // 1. Guardamos usando el lenguaje del DOMINIO (User)
+        // 1. Save using the DOMAIN language (User)
         User newUser = new User(null, "Ash", "ash@mail.com", "password123", new Long[]{1L});
         User savedUser = userRepositoryAdapter.save(newUser);
 
-        // 2. ASSERT DE INFRAESTRUCTURA
-        // Usamos el JpaUserRepository para ver la ENTIDAD real en la DB
+        // 2. INFRASTRUCTURE ASSERTION
+        // Use JpaUserRepository to see the real ENTITY in the DB
         UserEntity entityInDb = jpaUserRepository.findById(savedUser.getId()).orElseThrow();
 
-        // Aquí verificamos que la TABLA tiene los datos que queremos
+        // Here we verify that the TABLE has the data we want
         assertThat(entityInDb.getPokemonsIds()).containsExactly(1L);
         assertThat(entityInDb.getUsername()).isEqualTo("Ash");
 
-        // 3. ASSERT DE DOMINIO (Mapeo de vuelta)
-        // Verificamos que el Adapter sabe leer esos datos y devolver un User
+        // 3. DOMAIN ASSERTION (Mapping back)
+        // Verify that the Adapter knows how to read that data and return a User
         Optional<User> userFromAdapter = userRepositoryAdapter.findById(savedUser.getId());
         assertThat(userFromAdapter.get().getPokemonsIds()).containsExactly(1L);
     }
@@ -93,10 +93,10 @@ class UserRepositoryAdapterTest {
         // Arrange: Insertamos una entidad directamente (sin usar el adapter)
         UserEntity entity = jpaUserRepository.save(new UserEntity(null, "Brock", "brock@mail.com", "password123", new Long[]{4L}));
 
-        // Act: Eliminamos usando el ADAPTER
+        // Act: Delete using the ADAPTER
         userRepositoryAdapter.deleteById(entity.getId());
 
-        // Assert: Validamos que el Adapter eliminó la entidad
+        // Assert: Verify that the Adapter deleted the entity
         Optional<UserEntity> deletedEntity = jpaUserRepository.findById(entity.getId());
         assertThat(deletedEntity).isEmpty();
 

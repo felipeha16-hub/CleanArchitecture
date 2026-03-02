@@ -55,12 +55,12 @@ public class CreateUserUseCaseTest {
         // Act
         UserResponseDTO result = createUserUseCase.create(createUserDTO);
 
-        // Assert - Usamos AssertJ para mayor claridad en objetos sincrónicos
+        // Assert
         assertThat(result).isNotNull();
         assertThat(result.getEmail()).isEqualTo(createUserDTO.getEmail());
         assertThat(result.getPokemonsIds()).containsExactly(1L, 2L, 3L);
 
-        // Verificamos que se llamó al repo una vez
+        // Verify that the repository was called once
         verify(repository, times(1)).save(any(User.class));
     }
 
@@ -76,7 +76,7 @@ public class CreateUserUseCaseTest {
 
         assertThat(exception.getMessage()).isEqualTo(BusinessErrorMessage.USER_ALREADY_EXISTS.getMessage());
 
-        // Verificación Senior: Si el email existe, NO se debe hashear ni guardar nada
+
         verify(passwordEncoder, never()).encode(any());
         verify(repository, never()).save(any());
     }

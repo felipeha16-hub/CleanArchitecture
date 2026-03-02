@@ -21,12 +21,12 @@ public class PatchUserUseCase {
 
     public UserResponseDTO update(Long id, UpdateUserDTO dto) {
 
-        // 1. Obtener usuario existente
+        // 1.
         User user = repository.findById(id)
                 .orElseThrow(() -> new BusinessException(BusinessErrorMessage.USER_NOT_FOUND));
 
-        // 2. Validar que el nuevo email no exista en otro usuario
-        // Solo validar si el email cambió
+        // 2. Validate that the new email does not exist in another user
+        // Only validate if the email changed
         if (dto.getEmail() != null && !dto.getEmail().equals(user.getEmail())) {
             if (repository.existsByEmail(dto.getEmail())) {
                 throw new BusinessException(BusinessErrorMessage.USER_ALREADY_EXISTS);

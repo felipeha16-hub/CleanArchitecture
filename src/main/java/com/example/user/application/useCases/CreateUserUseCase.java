@@ -33,20 +33,20 @@ public class CreateUserUseCase {
         // 1. Convertir DTO a dominio
         User user = UserMapper.toDomain(dto);
 
-        // 2. Validar que el email no exista
+        // 2. Validate that the email does not exist
         if (repository.existsByEmail(user.getEmail())) {
             throw new BusinessException(BusinessErrorMessage.USER_ALREADY_EXISTS);
         }
 
-        // 3. Validar que la contraseña sea segura
+        // 3. Validate that the password is secure
         if (user.getPassword() == null || user.getPassword().length() < 8) {
             throw new BusinessException(BusinessErrorMessage.INVALID_PASSWORD);
         }
 
-        // 4. Hashear la password antes de persistir
+        // 4. Hash the password before persisting
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        // 5. Guardar en repositorio
+        // 5. Save to repository
         User savedUser = repository.save(user);
 
         // 6. Retornar DTO de respuesta
