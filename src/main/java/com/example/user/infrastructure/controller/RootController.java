@@ -9,7 +9,7 @@ import java.io.IOException;
 @RestController
 public class RootController {
 
-    @Operation(summary = "Redirige a la documentación de Swagger")
+    @Operation(summary = "Redirect to Swagger documentation")
     @GetMapping("/")
     public void redirectToSwagger(HttpServletResponse response) throws IOException {
         response.sendRedirect("/swagger-ui.html");

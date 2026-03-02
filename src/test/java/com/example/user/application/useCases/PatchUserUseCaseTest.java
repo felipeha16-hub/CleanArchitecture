@@ -30,7 +30,7 @@ class PatchUserUseCaseTest {
     private PatchUserUseCase patchUserUseCase;
 
     @Test
-    @DisplayName("Debe actualizar parcialmente cuando los datos son válidos")
+    @DisplayName("Should partially update when data is valid")
     void update_Success() {
         // Arrange
         Long userId = 1L;
@@ -52,7 +52,7 @@ class PatchUserUseCaseTest {
     }
 
     @Test
-    @DisplayName("Debe fallar si el usuario no existe")
+    @DisplayName("Should fail if user does not exist")
     void update_UserNotFound() {
         // Arrange
         when(repository.findById(1L)).thenReturn(Optional.empty());
@@ -66,7 +66,7 @@ class PatchUserUseCaseTest {
     }
 
     @Test
-    @DisplayName("Debe fallar si el nuevo email ya está en uso por otro")
+    @DisplayName("Should fail if the new email is already in use by another user")
     void update_EmailAlreadyExists() {
         // Arrange
         Long userId = 1L;

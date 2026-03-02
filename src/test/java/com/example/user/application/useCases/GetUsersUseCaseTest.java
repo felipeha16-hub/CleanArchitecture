@@ -54,7 +54,7 @@ public class GetUsersUseCaseTest {
     }
 
     @Test
-    @DisplayName("Debe retornar una lista vacía cuando no hay usuarios")
+    @DisplayName("Should return an empty list when there are no users")
     public void testGetAllUsers_Empty() {
         // Arrange
         when(repository.findAll()).thenReturn(List.of());

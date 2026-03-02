@@ -35,7 +35,7 @@ class UserE2EIT {
     }
 
     @Test
-    @DisplayName("E2E: Escenario completo de Usuario")
+    @DisplayName("E2E: Complete User Lifecycle Scenario")
     void userFullLifecycleE2E() {
         // --- 1. POST: Crear Usuario ---
         CreateUserDTO createRequest = new CreateUserDTO("Brock", "brock@pewter.com", "password", new Long[]{1L, 4L});
@@ -82,7 +82,7 @@ class UserE2EIT {
 
         // Should return 404
         assertThat(getAfterDelete.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(getAfterDelete.getBody()).contains("Usuario no encontrado");
+        assertThat(getAfterDelete.getBody()).contains("User not found");
     }
 
     @Test
@@ -119,7 +119,7 @@ class UserE2EIT {
 
         // 3. Assert
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        assertThat(response.getBody()).contains("El usuario ya existe");
+        assertThat(response.getBody()).contains("User already exists");
     }
 
     @Test

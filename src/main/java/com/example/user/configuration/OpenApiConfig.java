@@ -13,16 +13,16 @@ public class OpenApiConfig {
     public io.swagger.v3.oas.models.OpenAPI springShopOpenAPI() {
         return new io.swagger.v3.oas.models.OpenAPI()
                 .info(new Info().title("User API")
-                        .description("API de ejemplo para manejo de usuarios")
+                        .description("Example API for user management")
                         .version("v0.0.1"))
                 .externalDocs(new ExternalDocumentation()
-                        .description("Proyecto base")
+                        .description("Base project")
                         .url("https://example.com"));
     }
 
     /**
-     * Configuración para documentar solo los controladores de la API
-     * Sin excluir paquetes, solo documentamos los que nos interesa exponer
+     * Configuration to document only the API controllers
+     * Without excluding packages, we only document those we want to expose
      */
     @Bean
     public GroupedOpenApi publicApi() {

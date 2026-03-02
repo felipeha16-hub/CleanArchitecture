@@ -37,13 +37,13 @@ public class DeleteUserUseCaseIntegrationTest {
     }
 
     @Test
-    @DisplayName("integration succes:  UseCase -> Adapter -> DB")
+    @DisplayName("integration success: UseCase -> Adapter -> DB")
     void  shouldDeleteUser() {
-        // Crear un usuario para luego eliminarlo
+        // Create a user to delete later
         CreateUserDTO createDTO = new CreateUserDTO("TestUser", "test@mail.com", "password123", new Long[]{1L});
         UserResponseDTO createdUser = createUserUseCase.create(createDTO);
         userIdToDelete = createdUser.getId();
-        //Asegurarnos de que está en la DB antes de borrar
+        // Make sure it's in the DB before deleting
         assertThat(jpaUserRepository.existsById(userIdToDelete)).isTrue();
 
         deleteUserUseCase.delete(userIdToDelete);

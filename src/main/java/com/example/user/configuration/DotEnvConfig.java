@@ -4,21 +4,21 @@ import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Configuración para cargar variables de entorno desde el archivo .env
- * Se ejecuta automáticamente al iniciar la aplicación
+ * Configuration to load environment variables from the .env file
+ * Runs automatically when the application starts
  */
 @Configuration
 public class DotEnvConfig {
 
     public DotEnvConfig() {
-        // Cargar variables del archivo .env
-        // Si no existe .env, simplemente usa las variables de entorno del sistema
+        // Load variables from the .env file
+        // If .env doesn't exist, just use system environment variables
         Dotenv dotenv = Dotenv.configure()
-                .ignoreIfMissing() // No falla si .env no existe
+                .ignoreIfMissing() // Doesn't fail if .env doesn't exist
                 .load();
 
-        // Copiar todas las variables de .env a las variables de entorno del sistema
-        // Esto permite que Spring Boot las acceda via ${VAR_NAME}
+        // Copy all variables from .env to system environment variables
+        // This allows Spring Boot to access them via ${VAR_NAME}
         dotenv.entries().forEach(entry -> {
             if (System.getenv(entry.getKey()) == null) {
                 System.setProperty(entry.getKey(), entry.getValue());

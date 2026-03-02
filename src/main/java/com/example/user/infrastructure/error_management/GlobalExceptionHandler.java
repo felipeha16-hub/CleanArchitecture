@@ -131,7 +131,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Método auxiliar para extraer el path del request
+     * Helper method to extract the path from the request
      */
     private String extractPath(WebRequest request) {
         if (request instanceof ServletWebRequest servletRequest) {

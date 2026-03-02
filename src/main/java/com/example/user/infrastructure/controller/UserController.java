@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/users")
-@Tag(name = "Users", description = "Gestión de usuarios y pokémones asociados")
+@Tag(name = "Users", description = "User and associated Pokémon management")
 public class UserController {
 
     private final CreateUserUseCase createUserUseCase;
@@ -36,14 +36,14 @@ public class UserController {
 
     @GetMapping
     @Operation(
-            summary = "Obtener todos los usuarios",
-            description = "Retorna la lista completa de usuarios registrados en el sistema"
+            summary = "Get all users",
+            description = "Returns the complete list of users registered in the system"
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Lista de usuarios obtenida exitosamente"),
+            @ApiResponse(responseCode = "200", description = "List of users obtained successfully"),
             @ApiResponse(
                     responseCode = "500",
-                    description = "Error interno del servidor",
+                    description = "Internal server error",
                     content = @Content(
                             mediaType = "application/json",
                             examples = @ExampleObject(
@@ -60,19 +60,19 @@ public class UserController {
 
     @GetMapping("/{id}")
     @Operation(
-            summary = "Obtener usuario por ID",
-            description = "Obtiene los datos de un usuario específico junto con sus pokémones asociados"
+            summary = "Get user by ID",
+            description = "Get data for a specific user along with their associated Pokémon"
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Usuario encontrado exitosamente"),
+            @ApiResponse(responseCode = "200", description = "User found successfully"),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Usuario no encontrado (ID no existe)",
+                    description = "User not found (ID does not exist)",
                     content = @Content(
                             mediaType = "application/json",
                             examples = @ExampleObject(
-                                    name = "usuario_no_encontrado",
-                                    value = "{\"timestamp\":1771947757845,\"status\":404,\"error\":\"Not Found\",\"message\":\"Usuario no encontrado.\",\"path\":\"/api/users/999\"}"
+                                    name = "user_not_found",
+                                    value = "{\"timestamp\":1771947757845,\"status\":404,\"error\":\"Not Found\",\"message\":\"User not found.\",\"path\":\"/api/users/999\"}"
                             )
                     )
             ),
@@ -97,18 +97,18 @@ public class UserController {
     @PostMapping
     @Operation(
             summary = "Crear nuevo usuario",
-            description = "Crea un nuevo usuario con email, username, contraseña e IDs de pokémones"
+            description = "Create a new user with email, username, password, and Pokemon IDs"
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Usuario creado exitosamente"),
+            @ApiResponse(responseCode = "201", description = "User created successfully"),
             @ApiResponse(
                     responseCode = "400",
-                    description = "Datos inválidos o email ya existe (usuario duplicado)",
+                    description = "Invalid data or email already exists (duplicate user)",
                     content = @Content(
                             mediaType = "application/json",
                             examples = @ExampleObject(
-                                    name = "usuario_duplicado",
-                                    value = "{\"timestamp\":1771947757845,\"status\":400,\"error\":\"Bad Request\",\"message\":\"El usuario ya existe.\",\"path\":\"/api/users\"}"
+                                    name = "duplicate_user",
+                                    value = "{\"timestamp\":1771947757845,\"status\":400,\"error\":\"Bad Request\",\"message\":\"User already exists.\",\"path\":\"/api/users\"}"
                             )
                     )
             ),
@@ -132,36 +132,36 @@ public class UserController {
 
     @PatchMapping("/{id}")
     @Operation(
-            summary = "Actualizar usuario",
-            description = "Actualiza parcialmente los datos de un usuario (email, username, contraseña, IDs de pokémones)"
+            summary = "Update user",
+            description = "Partially update user data (email, username, password, Pokemon IDs)"
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Usuario actualizado exitosamente"),
+            @ApiResponse(responseCode = "200", description = "User updated successfully"),
             @ApiResponse(
                     responseCode = "400",
-                    description = "Datos inválidos o email ya existe en otro usuario",
+                    description = "Invalid data or email already exists in another user",
                     content = @Content(
                             mediaType = "application/json",
                             examples = @ExampleObject(
-                                    name = "usuario_duplicado",
-                                    value = "{\"timestamp\":1771947757845,\"status\":400,\"error\":\"Bad Request\",\"message\":\"El usuario ya existe.\",\"path\":\"/api/users/1\"}"
+                                    name = "duplicate_user",
+                                    value = "{\"timestamp\":1771947757845,\"status\":400,\"error\":\"Bad Request\",\"message\":\"User already exists.\",\"path\":\"/api/users/1\"}"
                             )
                     )
             ),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Usuario no encontrado",
+                    description = "User not found",
                     content = @Content(
                             mediaType = "application/json",
                             examples = @ExampleObject(
-                                    name = "usuario_no_encontrado",
-                                    value = "{\"timestamp\":1771947757845,\"status\":404,\"error\":\"Not Found\",\"message\":\"Usuario no encontrado.\",\"path\":\"/api/users/999\"}"
+                                    name = "user_not_found",
+                                    value = "{\"timestamp\":1771947757845,\"status\":404,\"error\":\"Not Found\",\"message\":\"User not found.\",\"path\":\"/api/users/999\"}"
                             )
                     )
             ),
             @ApiResponse(
                     responseCode = "500",
-                    description = "Error interno del servidor",
+                    description = "Internal server error",
                     content = @Content(
                             mediaType = "application/json",
                             examples = @ExampleObject(
@@ -178,25 +178,25 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @Operation(
-            summary = "Eliminar usuario",
-            description = "Elimina un usuario y todos sus datos asociados de forma permanente"
+            summary = "Delete user",
+            description = "Permanently delete a user and all associated data"
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Usuario eliminado exitosamente (sin contenido)"),
+            @ApiResponse(responseCode = "204", description = "User deleted successfully (no content)"),
             @ApiResponse(
                     responseCode = "404",
-                    description = "Usuario no encontrado",
+                    description = "User not found",
                     content = @Content(
                             mediaType = "application/json",
                             examples = @ExampleObject(
-                                    name = "usuario_no_encontrado",
-                                    value = "{\"timestamp\":1771947757845,\"status\":404,\"error\":\"Not Found\",\"message\":\"Usuario no encontrado.\",\"path\":\"/api/users/999\"}"
+                                    name = "user_not_found",
+                                    value = "{\"timestamp\":1771947757845,\"status\":404,\"error\":\"Not Found\",\"message\":\"User not found.\",\"path\":\"/api/users/999\"}"
                             )
                     )
             ),
             @ApiResponse(
                     responseCode = "500",
-                    description = "Error interno del servidor",
+                    description = "Internal server error",
                     content = @Content(
                             mediaType = "application/json",
                             examples = @ExampleObject(

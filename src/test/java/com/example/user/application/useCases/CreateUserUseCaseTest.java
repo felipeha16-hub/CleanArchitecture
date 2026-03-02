@@ -45,7 +45,7 @@ public class CreateUserUseCaseTest {
     }
 
     @Test
-    @DisplayName("Debe crear un usuario exitosamente cuando los datos son válidos")
+    @DisplayName("Should create user successfully when data is valid")
     void testCreateUserSuccess() {
         // Arrange
         when(repository.existsByEmail(createUserDTO.getEmail())).thenReturn(false);
@@ -65,7 +65,7 @@ public class CreateUserUseCaseTest {
     }
 
     @Test
-    @DisplayName("Debe fallar cuando el email ya existe")
+    @DisplayName("Should fail when email already exists")
     void testCreateUserFailure_EmailExists() {
         // Arrange
         when(repository.existsByEmail(anyString())).thenReturn(true);
@@ -82,7 +82,7 @@ public class CreateUserUseCaseTest {
     }
 
     @Test
-    @DisplayName("Debe fallar cuando la contraseña es muy corta o nula")
+    @DisplayName("Should fail when password is too short or null")
     void testCreateUser_InvalidPassword() {
         // Arrange
         CreateUserDTO dtoShortPass = new CreateUserDTO("jhon", "jhon@example.com", "123", new Long[]{1L});

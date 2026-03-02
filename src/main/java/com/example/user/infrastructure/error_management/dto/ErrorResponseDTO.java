@@ -7,14 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * DTO para respuestas de error estandarizadas
+ * DTO for standardized error responses
  *
- * Ejemplo de respuesta:
+ * Response example:
  * {
  *   "timestamp": 1771947757845,
  *   "status": 404,
  *   "error": "Not Found",
- *   "message": "Usuario no encontrado.",
+ *   "message": "User not found.",
  *   "path": "/api/users/99"
  * }
  */
@@ -32,7 +32,7 @@ public class ErrorResponseDTO {
     private String path;
 
     /**
-     * Constructor simplificado para crear respuestas rápidamente
+     * Simplified constructor to create responses quickly
      */
     public ErrorResponseDTO(int status, String error, String message) {
         this.timestamp = System.currentTimeMillis();

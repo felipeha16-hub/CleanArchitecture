@@ -14,12 +14,12 @@ import org.springframework.stereotype.Component;
 
 
 /**
- * CreateUserUseCase: Caso de uso para crear un nuevo usuario
+ * CreateUserUseCase: Use case to create a new user
  *
- * Validaciones:
- * - El email no debe estar duplicado (400 Bad Request)
- * - La contraseña debe tener al menos 8 caracteres (400 Bad Request)
- * - El email debe ser válido (delegado a @Email en DTO)
+ * Validations:
+ * - Email must not be duplicated (400 Bad Request)
+ * - Password must be at least 8 characters (400 Bad Request)
+ * - Email must be valid (delegated to @Email in DTO)
  */
 @AllArgsConstructor
 @Component
