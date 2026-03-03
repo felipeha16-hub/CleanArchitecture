@@ -22,6 +22,5 @@ public class UserEntity {
     private Long[] pokemonsIds;
 
 
-
 }
 

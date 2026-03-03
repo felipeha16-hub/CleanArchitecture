@@ -1,0 +1,11 @@
+--Create the initial users table with all required columns
+
+CREATE TABLE IF NOT EXISTS users (
+    id BIGSERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    pokemons_ids BIGINT[]
+);
+
+
